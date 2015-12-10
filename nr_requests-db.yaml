@@ -1,0 +1,8 @@
+- hosts: 'all'
+  gather_facts: false
+  user: root
+  sudo: true
+
+  tasks:
+  - name:
+    shell: 'for d in $(find /sys/block/sd*); do sed -i "s|exit 0|echo 16 > $d/queue/nr_requests\nexit 0|g" /etc/rc.local; done'
